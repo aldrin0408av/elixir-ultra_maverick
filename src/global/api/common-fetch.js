@@ -24,6 +24,7 @@ export const useFetchTaggedApi = (role) => {
                     })
                 }
             }
+            console.log('API Requested - Get: Tagged Modules')
             return unique
         } catch (error) {
             console.log(error)
@@ -35,9 +36,36 @@ export const useFetchNotificationApi = async () => {
     return useQuery(async () => {
         try {
             const res = await apiClient.get(`Receiving/GetNotification`)
+            console.log('API Requested - Get: Notifications')
             return res.data
         } catch (error) {
             console.log(error)
         }
     })
 }
+
+
+
+//Default Confirm Toast
+
+// Swal.fire({
+//     title: 'Are you sure?',
+//     text: "You won't be able to revert this!",
+//     icon: 'warning',
+//     showCancelButton: true,
+//     confirmButtonColor: '#3085d6',
+//     cancelButtonColor: '#d33',
+//     confirmButtonText: 'Yes, delete it!'
+//   }).then((result) => {
+//     if (result.isConfirmed) {
+//       // await post api here
+//       //.then final swal
+//       Swal.fire({
+//     position: 'top-end',
+//     icon: 'success',
+//     title: 'Your work has been saved',
+//     showConfirmButton: false,
+//     timer: 1500
+//   })
+//     }
+//   })
