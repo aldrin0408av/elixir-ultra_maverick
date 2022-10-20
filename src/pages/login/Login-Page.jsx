@@ -1,22 +1,14 @@
+import React from 'react';
+import CryptoJS from 'crypto-js';
 import { Box, Button, Flex, Image, Input, Text, VStack } from '@chakra-ui/react';
-import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
-import apiClient from '../../services/apiClient';
 import { useNavigate } from 'react-router-dom';
-import CryptoJS from 'crypto-js';
 import { saltkey } from '../../@features/saltkey';
-import Swal from 'sweetalert2';
-
-const loginSchema = yup.object({
-    userName: yup.string().required("Username is required"),
-    password: yup.string().required("Password is required")
-})
+import { loginSchema, useLoginApi } from './login.api.services';
+import { BasicToast } from '../../utils/Toast';
 
 const LoginPage = () => {
-
-    const [isLoading, setisLoading] = useState(false)
 
     const navigate = useNavigate()
 
@@ -25,33 +17,22 @@ const LoginPage = () => {
         mode: "onChange"
     })
 
+    const { mutate: loginUser, isLoading } = useLoginApi()
     const submitHandler = async (submitData) => {
-        try {
-            setisLoading(true)
-            const res = await apiClient.post("Login/Authenticate", submitData)
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: `Welcome ${res.data.fullName}`,
-                showConfirmButton: false,
-                timer: 1000
-            }).then(() => {
-                navigate("/")
-                var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(res.data), saltkey).toString()
-                sessionStorage.setItem('userData', ciphertext)
-                setisLoading(false)
-                window.location.reload(false)
-            })
-        } catch (err) {
-            setisLoading(false)
-            Swal.fire({
-                position: 'top-end',
-                icon: 'error',
-                title: err.response.data.message,
-                showConfirmButton: false,
-                timer: 1500
-            })
-        }
+        loginUser(submitData, {
+            onSuccess: (res) => {
+                BasicToast('top-end', 'success', `Welcome ${res.data.fullName}`, 1000)
+                    .then(() => {
+                        navigate("/")
+                        var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(res.data), saltkey).toString()
+                        sessionStorage.setItem('userData', ciphertext)
+                        window.location.reload(false)
+                    })
+            },
+            onError: (err) => {
+                BasicToast('top-end', 'error', err.response.data.message, 1000)
+            }
+        })
     }
 
     return (
@@ -59,13 +40,7 @@ const LoginPage = () => {
         <Flex bgGradient="linear(to-l, secondary, primary)" h='100vh' justifyContent='center' alignItems='center'>
             <form onSubmit={handleSubmit(submitHandler)}>
                 <VStack spacing={2} bgColor='gray.600' pl={10} pr={10} pt={4} pb={3} rounded={6}>
-                    {/* <VStack> */}
-                    {/* <HStack> */}
                     <Image width='200px' src='/images/umelixirlogo.png' />
-                    {/* <Image width='85px' src='/images/logo.png' /> */}
-                    {/* </HStack> */}
-                    {/* <Heading color='#18b58f' size='md' fontFamily="">UM-Elixir</Heading> */}
-                    {/* </VStack> */}
                     <Box>
                         <Input variant='filled' size='sm' autoComplete='off' placeholder='Username' {...register("userName")} />
                         <Text color="danger" fontSize='xs' mt={1}>{errors.userName?.message}</Text>

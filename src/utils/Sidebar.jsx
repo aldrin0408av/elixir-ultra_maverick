@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Flex, Box, Text, Accordion, AccordionItem, AccordionButton, AccordionPanel, VStack, HStack, Avatar } from '@chakra-ui/react';
 import { Link, useLocation } from 'react-router-dom';
 import { BiRadioCircle, BiRadioCircleMarked } from 'react-icons/bi'
-import { useFetchTaggedApi } from '../global/api/common-fetch'
+import { useFetchTaggedApi } from '../global/api/common.api.services'
 import { decodeUser } from '../services/token/decode-user';
 
 const user = decodeUser()
