@@ -23,7 +23,7 @@ const SidebarFooter = () => {
     )
 }
 
-const Sidebar = () => {
+const Sidebar = ({ setModuleName }) => {
 
     const { data: navigationData } = useFetchTaggedApi(user.role)
 
@@ -49,7 +49,7 @@ const Sidebar = () => {
                         <AccordionItem key={modName.mainMenuId}
                             border='none'
                         >
-                            <Link to={modName.path}>
+                            <Link>
                                 <AccordionButton onClick={() => buttonHandler(modName)}
                                     bgColor={pathname.includes(modName.path) ? 'accent' : 'secondary'}
                                     bgGradient={pathname.includes(modName.path) ? "linear(to-l, #003366, accent)" : 'secondary'}
@@ -72,7 +72,7 @@ const Sidebar = () => {
                                             boxShadow={pathname.includes(sub.path) ? '2px 2px 6px 2px teal' : ''}
                                             _hover={{ bgGradient: "linear(to-l, #003366, accent)" }}
                                         >
-                                            <Link to={sub.path}>
+                                            <Link to={sub.path} onClick={() => setModuleName(sub.title)}>
                                                 <HStack justifyContent='space-between' px={1}>
                                                     <Text color='white'>{sub.title}</Text>
                                                     {pathname.includes(sub.path) ? <BiRadioCircleMarked color='white' fontSize='20px' /> : <BiRadioCircle color='white' fontSize='20px' />}

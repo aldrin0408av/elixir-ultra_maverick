@@ -15,8 +15,13 @@ import Preparation from '../../pages/transformation/preparation'
 import UserManagement from '../../pages/user-management'
 import UserRole from '../../pages/user-management/user-role'
 
-
 const user = decodeUser()
+
+const AuthenticatedRoutes = () => {
+    return (
+        user ? <Layout /> : <Navigate to='/login' />
+    )
+}
 
 export const Routing = () => {
 
@@ -24,39 +29,37 @@ export const Routing = () => {
         { path: "*", element: <NotFoundPage /> },
         {
             path: "/",
-            element: user ?
-                <Layout />
-                : <Navigate to='/login' />,
+            element: <AuthenticatedRoutes />,
             children: [
                 {
                     path: 'transformation',
-                    element: user ? <TransformationPage /> : <Navigate to='/login' />,
+                    element: <TransformationPage />,
                     children: [
                         {
                             path: 'transformation-planning',
-                            element: user ? <TransformationPlanning /> : <Navigate to='/login' />
+                            element: <TransformationPlanning />
                         },
                         {
                             path: 'approval-request',
-                            element: user ? <ApprovalRequest /> : <Navigate to='/login' />
+                            element: <ApprovalRequest />
                         },
                         {
                             path: 'preparation',
-                            element: user ? <Preparation /> : <Navigate to='/login' />
+                            element: <Preparation />
                         },
                         {
                             path: 'mixing',
-                            element: user ? <Mixing /> : <Navigate to='/login' />
+                            element: <Mixing />
                         }
                     ]
                 },
                 {
                     path: 'user-management',
-                    element: user ? <UserManagement /> : < Navigate to='/login' />,
+                    element: <UserManagement />,
                     children: [
                         {
                             path: 'user-role',
-                            element: user ? <UserRole /> : < Navigate to='/login' />
+                            element: <UserRole />
                         }
                     ]
                 }

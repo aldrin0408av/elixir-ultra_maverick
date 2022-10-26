@@ -26,7 +26,6 @@ export const useFetchTaggedApi = (role) => {
                         })
                     }
                 }
-                console.log('API Requested - Get: Tagged Modules')
                 return unique
             } catch (error) {
                 console.log(error)
@@ -44,7 +43,6 @@ export const useFetchNotificationApi = async () => {
         async () => {
             try {
                 const res = await apiClient.get(`Receiving/GetNotification`)
-                console.log('API Requested - Get: Notifications')
                 return res.data
             } catch (error) {
                 console.log(error)

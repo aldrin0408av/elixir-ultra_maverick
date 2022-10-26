@@ -1,6 +1,7 @@
 import { Routing } from "../utils/routing/routing";
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { decodeUser } from "../services/token/decode-user";
+import './App.scss'
 
 const user = decodeUser()
 

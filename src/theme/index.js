@@ -28,37 +28,44 @@ const theme = extendTheme({
             variants: {
                 filled: {
                     field: {
+                        borderColor: "accent",
                         borderRadius: "none",
-                        backgroundColor: "secondary",
-                        color: 'white',
                         _focus: {
-                            borderColor: "accent",
+                            borderColor: "myWhite",
+                            color: '#27273A'
                         },
                         _active: {
-                            borderColor: "accent",
+                            borderColor: "myWhite",
+                            color: '#27273A'
                         },
                         _hover: {
-                            backgroundColor: "secondary",
-                            borderColor: "accent",
+                            borderColor: "#27273A",
                         }
                     },
                 },
                 outline: {
                     field: {
+                        borderColor: "accent",
                         borderRadius: "none",
                         _focus: {
-                            borderColor: "purple.500",
+                            borderColor: "myWhite",
+                            color: '#27273A'
                         },
                         _active: {
-                            borderColor: "purple.500",
+                            borderColor: "myWhite",
+                            color: '#27273A'
                         },
+                        _hover: {
+                            borderColor: "#27273A",
+                        }
                     },
                 },
             },
         },
         Button: {
             baseStyle: {
-                borderRadius: "none"
+                borderRadius: "none",
+                borderColor: "accent",
             },
         },
         Select: {
@@ -66,6 +73,16 @@ const theme = extendTheme({
                 outline: {
                     field: {
                         borderRadius: "1px",
+                        borderColor: "accent",
+                        _focus: {
+                            borderColor: "accent",
+                        },
+                        _active: {
+                            borderColor: "accent",
+                        },
+                        _hover: {
+                            borderColor: "accent",
+                        }
                     },
                 },
             },

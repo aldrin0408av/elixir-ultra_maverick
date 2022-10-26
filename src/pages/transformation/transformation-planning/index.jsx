@@ -6,7 +6,7 @@ const TransformationPlanning = () => {
 
   return (
     <>
-      <Flex w='full' p={2} h='94.5vh'>
+      <Flex w='full' p={2} h='87vh'>
         <VStack w='full'>
 
           <Flex justifyContent='start' w='full'>

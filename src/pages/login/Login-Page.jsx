@@ -21,7 +21,7 @@ const LoginPage = () => {
     const submitHandler = async (submitData) => {
         loginUser(submitData, {
             onSuccess: (res) => {
-                BasicToast('top-end', 'success', `Welcome ${res.data.fullName}`, 1000)
+                BasicToast('top-end', 'success', `Welcome ${res.data.fullName}`, 700)
                     .then(() => {
                         navigate("/")
                         var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(res.data), saltkey).toString()
@@ -42,11 +42,11 @@ const LoginPage = () => {
                 <VStack spacing={2} bgColor='gray.600' pl={10} pr={10} pt={4} pb={3} rounded={6}>
                     <Image width='200px' src='/images/umelixirlogo.png' />
                     <Box>
-                        <Input variant='filled' size='sm' autoComplete='off' placeholder='Username' {...register("userName")} />
+                        <Input _focus={{ color: 'myWhite' }} variant='filled' size='sm' autoComplete='off' placeholder='Username' {...register("userName")} />
                         <Text color="danger" fontSize='xs' mt={1}>{errors.userName?.message}</Text>
                     </Box>
                     <Box>
-                        <Input variant='filled' size='sm' autoComplete='off' placeholder='Password' type='password' {...register("password")} />
+                        <Input _focus={{ color: 'myWhite' }} variant='filled' size='sm' autoComplete='off' placeholder='Password' type='password' {...register("password")} />
                         <Text color="danger" fontSize='xs' mt={1}>{errors.password?.message}</Text>
                     </Box>
                     <Button width='full' bgColor='#18b58f' size='sm' type='sumbit' disabled={!isValid} isLoading={isLoading}>
