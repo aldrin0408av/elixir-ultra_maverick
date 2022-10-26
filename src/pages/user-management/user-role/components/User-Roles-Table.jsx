@@ -79,11 +79,11 @@ const UserRolesTable = () => {
       </Flex>
 
       <Flex w='full' justifyContent='center'>
-        <ScrollFunction minHeight='200px' maxHeight='auto' width='full'>
+        <ScrollFunction minHeight='200px' maxHeight='75vh' width='full'>
           {isLoading ? 'Hi'
             :
             <Table size='sm'>
-              <Thead bgColor='primary'>
+              <Thead position='sticky' zIndex='docked' top={0} bgColor='primary'>
                 <Tr>
                   <Th color='myWhite'>ID</Th>
                   <Th color='myWhite'>User Role</Th>

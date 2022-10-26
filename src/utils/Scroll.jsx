@@ -23,5 +23,5 @@ export const ScrollFunction = ({ children, minHeight, maxHeight, width }) => {
             {children}
         </Box>
     )
-    
+
 }
