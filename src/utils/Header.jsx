@@ -8,6 +8,7 @@ import {
     MenuButton,
     MenuItem,
     MenuList,
+    Switch,
     Text
 } from '@chakra-ui/react';
 import { BiUser } from 'react-icons/bi'
@@ -25,7 +26,7 @@ const Header = (props) => {
         window.location.reload(false);
     }
 
-    const { sideBarHandler } = props
+    const { sideBarHandler, changeSidebar, setChangeSidebar } = props
 
     return (
         <Flex h='42px' justifyContent='space-between' pl={2} pr={2} alignItems='center' fontSize='sm' fontWeight='semibold' color='secondary'>
@@ -50,6 +51,11 @@ const Header = (props) => {
                         <MenuList>
                             <MenuItem color='black' cursor='default'>
                                 {`Username: ${user && user?.userName}`}
+                            </MenuItem>
+                            <MenuItem closeOnSelect={false}>
+                                <Box>Change sidebar
+                                    <Switch size='sm' onChange={() => setChangeSidebar(!changeSidebar)} />
+                                </Box>
                             </MenuItem>
                             <MenuItem _hover={{ color: 'accent' }} onClick={logout}>Log out</MenuItem>
                         </MenuList>

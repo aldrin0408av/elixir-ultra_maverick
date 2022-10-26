@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import {
-    Flex,
-    Text,
-    useMediaQuery
-} from '@chakra-ui/react'
-import { Outlet, useLocation } from 'react-router-dom'
 import { ScrollFunction } from './Scroll'
-import Sidebar from './Sidebar'
+import { Outlet, useLocation } from 'react-router-dom'
+import { Flex, Text, useMediaQuery } from '@chakra-ui/react'
 import Header from './Header'
+import Sidebar from './Sidebar'
+import OldSidebar from './OldSidebar'
 import IntroductionPage from '../pages/introduction'
-
 
 export const Layout = () => {
 
+    const [changeSidebar, setChangeSidebar] = useState(false)
     const [moduleName, setModuleName] = useState('')
-
     const [isSidebarVisible, setIsSidebarVisible] = useState(false)
     const [isMobile] = useMediaQuery('(max-width: 1230px)')
 
@@ -30,11 +26,14 @@ export const Layout = () => {
 
     return (
         <Flex bgColor='myWhite' h='100vh' w='full'>
-            {!isSidebarVisible &&
-                <Sidebar setModuleName={setModuleName} />
+            {isSidebarVisible &&
+                changeSidebar ?
+                <OldSidebar setModuleName={setModuleName} />
+                :
+                <Sidebar setModuleName={setModuleName} sideBarHandler={SideBarHandler} isSidebarVisible={isSidebarVisible} />
             }
             <Flex w='full' bgColor='gray.300' flexDirection='column' gap={5}>
-                <Header sideBarHandler={SideBarHandler} isSidebarVisible={isSidebarVisible} />
+                <Header sideBarHandler={SideBarHandler} isSidebarVisible={isSidebarVisible} changeSidebar={changeSidebar} setChangeSidebar={setChangeSidebar} />
                 {pathname?.pathname === '/' ?
                     <IntroductionPage />
                     :
